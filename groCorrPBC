@@ -22,7 +22,7 @@ OUT=${bn%.*}.${fmt}
 echo "INP: $TRJ"
 echo "TOP: $TOP"
 echo "OUT: $OUT"
-read -p "OK? [Enter]"
+#read -p "OK? [Enter]"
 
 echo System | gmx trjconv -s $TOP \
                           -f ${TRJ} \

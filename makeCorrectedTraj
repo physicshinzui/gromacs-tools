@@ -1,15 +1,15 @@
 #!/bin/bash
 set -Ceu
-
 cat<<EOS
 
 Usage:
-    $0 [path to a dir including traj files (.xtc) and a reference file (.tpr) ]
+    $0 [FULL PATH to a directory including *.xtc and em2.tpr ]
 
 Note: 
     This program accepts only the full path. 
     
 EOS
+SCRIPT="/Users/siida/Dropbox/01code/software/myTools/for_gromacs/script/groCorrPBC"
 
 readonly TRAJ_DIR="corrected_traj_data"
 readonly PATH_TO_ORIG_TRAJ=$1
@@ -17,17 +17,16 @@ readonly PREFIX='npt_prod'
 
 cat<<EOS
 I'm going to create ${TRAJ_DIR}. 
-Are you OK? [Enter]
 EOS
-read
+read -p "How many trajectories you are going to process? : " n_runs
 
 mkdir ${TRAJ_DIR}
 cd ${TRAJ_DIR}
 mkdir system 
 cd system
 
-for (( i=0; i<5; i++ )); do
-    gro_corrpbc.sh ${PATH_TO_ORIG_TRAJ}/${PREFIX}_${i}.xtc ${PATH_TO_ORIG_TRAJ}/em2.tpr  1 xtc
+for (( i=0; i<${n_runs}; i++ )); do
+    ${SCRIPT} ${PATH_TO_ORIG_TRAJ}/${PREFIX}_${i}.xtc ${PATH_TO_ORIG_TRAJ}/em2.tpr 1 xtc
 done
 
 cd -
