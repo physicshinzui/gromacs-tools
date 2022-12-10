@@ -39,7 +39,7 @@ echo Protein System | gmx trjconv -s $TOP \
 echo Protein System | gmx trjconv -s $TOP \
                        -f ${OUTNAME} \
                        -o ${OUTNAME} \
-                       -pbc mol -ur compact -center
+                       -pbc res -ur compact -center
 
 echo Protein System | gmx trjconv -s ${TOP} \
                        -f ${OUTNAME} \
