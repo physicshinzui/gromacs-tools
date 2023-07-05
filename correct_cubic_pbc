@@ -1,7 +1,10 @@
 #!/bin/bash 
-
-echo "System" | gmx trjconv -f npt_prod.xtc -s em.tpr -pbc whole -o a.xtc -tu ns -b 10
-gmx trjconv -f a.xtc -s em.tpr -o b.gro -pbc mol -center -ur compact <<EOF
+set -eu
+xtc=$1
+top=$2
+echo "System" | gmx trjconv -f $xtc -s $top -pbc whole -o tmp.xtc #-tu ns -b 10
+gmx trjconv -f tmp.xtc -s $top -o corrected_${xtc} -pbc mol -center -ur compact <<EOF
 Protein
 System
 EOF
+rm tmp.xtc
