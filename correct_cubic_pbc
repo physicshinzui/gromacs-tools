@@ -1,0 +1,7 @@
+#!/bin/bash 
+
+echo "System" | gmx trjconv -f npt_prod.xtc -s em.tpr -pbc whole -o a.xtc -tu ns -b 10
+gmx trjconv -f a.xtc -s em.tpr -o b.gro -pbc mol -center -ur compact <<EOF
+Protein
+System
+EOF
